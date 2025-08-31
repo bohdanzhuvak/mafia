@@ -45,6 +45,11 @@ class GameManager {
         assignBtn.addEventListener("click", () => {
             try {
                 this.game.assignRoles();
+                // Активируем кнопку "Показати всі ролі" после раздачи ролей
+                const showAllRolesBtn = document.getElementById("showAllRolesBtn");
+                if (showAllRolesBtn) {
+                    showAllRolesBtn.disabled = false;
+                }
                 console.log('🎯 Roles assigned successfully');
             } catch (error) {
                 console.error('❌ Failed to assign roles:', error);
@@ -67,6 +72,34 @@ class GameManager {
                 if (this.game && this.game.getRemainingRoles() > 0) {
                     this.game.showNextRole();
                 }
+            }
+        });
+
+        const showAllRolesBtn = document.getElementById("showAllRolesBtn");
+        if (showAllRolesBtn) {
+            showAllRolesBtn.disabled = true;
+
+            showAllRolesBtn.addEventListener("click", () => {
+                try {
+                    this.game.showAllRoles();
+                    console.log('📋 Showing all roles');
+                } catch (error) {
+                    console.error('❌ Failed to show all roles:', error);
+                    this.showErrorMessage('Помилка показу всіх ролей');
+                }
+            });
+        }
+
+        card.addEventListener('backToGame', () => {
+            try {
+                if (this.game.getCurrentIndex() > 0) {
+                    this.game.renderRoleCard(this.game.getCurrentRole());
+                } else {
+                    this.game.renderHiddenCard(1);
+                }
+            } catch (error) {
+                console.error('❌ Failed to return to game:', error);
+                this.showErrorMessage('Помилка повернення до гри');
             }
         });
     }

@@ -67,8 +67,57 @@ export class MafiaGame {
             </div>`;
     }
 
+    showAllRoles() {
+        if (this.assignedRoles.length === 0) {
+            this.card.innerHTML = `
+                <div class="card">
+                    <p>Спочатку роздайте ролі!</p>
+                </div>`;
+            return;
+        }
+
+        const rolesList = this.assignedRoles.map((role, index) => {
+            const imagePath = `img/${role.image}`;
+            return `
+                <div class="role-item ${role.team}-team">
+                    <div class="role-number">${index + 1}</div>
+                    <div class="role-info">
+                        <h4>${role.name}</h4>
+                        <span class="team-badge">${role.team === 'mafia' ? 'Мафія' : 'Місто'}</span>
+                    </div>
+                    <img src="${imagePath}" alt="${role.name}" class="role-thumbnail">
+                </div>
+            `;
+        }).join('');
+
+        this.card.innerHTML = `
+            <div class="card all-roles-card">
+                <h2>📋 Всі ролі гравців</h2>
+                <div class="roles-list">
+                    ${rolesList}
+                </div>
+                <div class="roles-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">Мафія:</span>
+                        <span class="summary-value mafia-count">${this.assignedRoles.filter(r => r.team === 'mafia').length}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Місто:</span>
+                        <span class="summary-value town-count">${this.assignedRoles.filter(r => r.team === 'town').length}</span>
+                    </div>
+                </div>
+                <button class="back-btn" onclick="this.closest('.card').dispatchEvent(new CustomEvent('backToGame'))">
+                    Повернутися до гри
+                </button>
+            </div>`;
+    }
+
     getCurrentRole() {
         return this.assignedRoles[this.currentIndex] || null;
+    }
+
+    getCurrentIndex() {
+        return this.currentIndex;
     }
 
     getRemainingRoles() {
