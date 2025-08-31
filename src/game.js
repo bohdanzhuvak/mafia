@@ -1,33 +1,34 @@
-import { ROLES, ROLE_TRANSLATIONS } from "./roles.js";
+import { ROLES, PLAYER_IMAGES } from "./roles.js";
 import { shuffle } from "./utils.js";
 
 export class MafiaGame {
     constructor(roleCardId) {
         this.roles = [...ROLES];
+        this.playerImages = [...PLAYER_IMAGES];
         this.assignedRoles = [];
+        this.assignedImages = [];
         this.currentIndex = 0;
         this.card = document.getElementById(roleCardId);
     }
 
     assignRoles() {
-        this.assignedRoles = shuffle([...this.roles]);
+        const shuffledIndices = shuffle([...Array(this.roles.length).keys()]);
+
+        this.assignedRoles = shuffledIndices.map(index => this.roles[index]);
+        this.assignedImages = shuffledIndices.map(index => this.playerImages[index]);
+
         this.currentIndex = 0;
         this.renderHiddenCard(1);
     }
 
-    translateRole(role) {
-        return ROLE_TRANSLATIONS[role] || "unknown";
-    }
-
     showNextRole() {
         if (this.currentIndex >= this.assignedRoles.length) {
-            this.card.innerHTML = `<div class="card"><p>Усі ролі роздано!</p></div>`;
+            this.card.innerHTML = `<div class="card"><p>Всі ролі роздано!</p></div>`;
             return;
         }
 
         const role = this.assignedRoles[this.currentIndex];
-        const roleKey = this.translateRole(role);
-        const imagePath = `img/${roleKey}.jpg`;
+        const imagePath = `img/${this.assignedImages[this.currentIndex]}`;
 
         if (this.card.dataset.step !== "shown") {
             this.renderRoleCard(role, imagePath);
@@ -37,7 +38,7 @@ export class MafiaGame {
             if (this.currentIndex < this.assignedRoles.length) {
                 this.renderHiddenCard(this.currentIndex + 1);
             } else {
-                this.card.innerHTML = `<div class="card"><p>Усі ролі роздано!</p></div>`;
+                this.card.innerHTML = `<div class="card"><p>Всі ролі роздано!</p></div>`;
             }
         }
     }
@@ -45,7 +46,7 @@ export class MafiaGame {
     renderRoleCard(role, imagePath) {
         this.card.innerHTML = `
       <div class="card">
-        <h2>Роль гравця ${this.currentIndex + 1}</h2>
+        <h2>Гравець ${this.currentIndex + 1}</h2>
         <p>${role}</p>
         <img src="${imagePath}" alt="${role}">
       </div>`;
@@ -53,9 +54,8 @@ export class MafiaGame {
 
     renderHiddenCard(playerNumber) {
         this.card.innerHTML = `
-      <div class="card">
-        <p>Натисни, щоб побачити роль гравця ${playerNumber}</p>
-        <img src="img/default.png" alt="Next">
+      <div class="card hidden-role">
+        <p>Натисни для ролі ${playerNumber}</p>
       </div>`;
         this.card.dataset.step = "hidden";
     }

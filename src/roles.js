@@ -11,10 +11,15 @@ export const ROLES = [
     "Мирний"
 ];
 
-export const ROLE_TRANSLATIONS = {
-    "Мафія": "mafia",
-    "Дон": "don",
-    "Шериф": "sheriff",
-    "Мирний": "civil",
-    "Лікар": "doctor"
-};
+export const PLAYER_IMAGES = [
+    "mafia1.jpg",
+    "mafia2.jpg",
+    "don.jpg",
+    "sheriff.jpg",
+    "civil1.jpg",
+    "civil2.jpg",
+    "civil3.jpg",
+    "civil4.jpg",
+    "civil5.jpg",
+    "civil6.jpg"
+];

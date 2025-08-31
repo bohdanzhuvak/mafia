@@ -2,13 +2,19 @@
 <html lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Роздача ролей — Мафія</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мафія</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Гра Мафія: Роздача ролей</h1>
-    <button id="assignRolesBtn">Роздати ролі</button>
-    <div id="roleCard" data-step="hidden"></div>
+    <header>
+        <h1>Мафія</h1>
+    </header>
+    
+    <main>
+        <button id="assignRolesBtn">Роздати ролі</button>
+        <div id="roleCard" data-step="hidden" role="region" aria-label="Роль"></div>
+    </main>
 
     <script type="module" src="../src/main.js"></script>
 </body>
