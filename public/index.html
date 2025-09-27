@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Мафія</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main>
-        <div class="head">
-            <button id="assignRolesBtn">Роздати ролі</button>
-            <button id="showAllRolesBtn">Показати всі ролі</button>
-        </div>
-        <div id="roleCard" data-step="hidden" role="region" aria-label="Роль"></div>
-    </main>
+    <div class="container">
+        <main class="game-main">
+            <div class="controls">
+                <button id="assignRolesBtn" class="btn btn-primary">Роздати ролі</button>
+                <button id="showAllRolesBtn" class="btn btn-secondary" disabled>Показати всі ролі</button>
+            </div>
+
+            <div id="roleCard" class="role-card-container" data-step="hidden" role="region" aria-label="Роль гравця"></div>
+        </main>
+    </div>
+
     <script type="module" src="../src/main.js"></script>
 </body>
 </html>
