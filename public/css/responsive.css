@@ -43,7 +43,7 @@
     .card {
         padding: var(--spacing-md);
         border-radius: var(--border-radius-lg);
-        min-height: fit-content;
+        min-height: 35rem;
     }
 
     .role-item {
