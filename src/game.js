@@ -1,4 +1,4 @@
-import {GAME_ROLES} from "./roles.js";
+import {GAME_ROLES, getMafiaCount, getTownCount} from "./roles.js";
 import {shuffle} from "./utils.js";
 
 export class MafiaGame {
@@ -99,11 +99,11 @@ export class MafiaGame {
                 <div class="roles-summary">
                     <div class="summary-item">
                         <span class="summary-label">Мафія:</span>
-                        <span class="summary-value mafia-count">${this.assignedRoles.filter(r => r.team === 'mafia').length}</span>
+                        <span class="summary-value mafia-count">${getMafiaCount()}</span>
                     </div>
                     <div class="summary-item">
                         <span class="summary-label">Місто:</span>
-                        <span class="summary-value town-count">${this.assignedRoles.filter(r => r.team === 'town').length}</span>
+                        <span class="summary-value town-count">${getTownCount()}</span>
                     </div>
                 </div>
                 <button class="back-btn" onclick="this.closest('.card').dispatchEvent(new CustomEvent('backToGame'))">

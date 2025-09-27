@@ -18,9 +18,7 @@ class GameManager {
             this.setupEventListeners();
             this.isInitialized = true;
 
-            console.log('🎮 Mafia Game initialized successfully');
         } catch (error) {
-            console.error('❌ Failed to initialize game:', error);
             this.showErrorMessage('Помилка ініціалізації гри');
         }
     }
@@ -45,14 +43,11 @@ class GameManager {
         assignBtn.addEventListener("click", () => {
             try {
                 this.game.assignRoles();
-                // Активируем кнопку "Показати всі ролі" после раздачи ролей
                 const showAllRolesBtn = document.getElementById("showAllRolesBtn");
                 if (showAllRolesBtn) {
                     showAllRolesBtn.disabled = false;
                 }
-                console.log('🎯 Roles assigned successfully');
             } catch (error) {
-                console.error('❌ Failed to assign roles:', error);
                 this.showErrorMessage('Помилка роздачі ролей');
             }
         });
@@ -61,7 +56,6 @@ class GameManager {
             try {
                 this.game.showNextRole();
             } catch (error) {
-                console.error('❌ Failed to show next role:', error);
                 this.showErrorMessage('Помилка показу ролі');
             }
         });
@@ -82,9 +76,7 @@ class GameManager {
             showAllRolesBtn.addEventListener("click", () => {
                 try {
                     this.game.showAllRoles();
-                    console.log('📋 Showing all roles');
                 } catch (error) {
-                    console.error('❌ Failed to show all roles:', error);
                     this.showErrorMessage('Помилка показу всіх ролей');
                 }
             });
@@ -98,7 +90,6 @@ class GameManager {
                     this.game.renderHiddenCard(1);
                 }
             } catch (error) {
-                console.error('❌ Failed to return to game:', error);
                 this.showErrorMessage('Помилка повернення до гри');
             }
         });
@@ -136,7 +127,7 @@ class GameManager {
 
 const gameManager = new GameManager();
 gameManager.initialize().catch(error => {
-    console.error('❌ Game initialization failed:', error);
+    console.error('Game initialization failed:', error);
 });
 
 export { gameManager };
